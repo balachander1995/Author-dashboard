@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-950 text-stone-100 font-body antialiased;
+    background-image: 
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(232, 146, 10, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(120, 80, 20, 0.06) 0%, transparent 50%);
+  }
+
+  ::selection {
+    @apply bg-gold-500 text-slate-950;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-950;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gold-700 rounded-full;
+  }
+}
+
+@layer components {
+  .section-label {
+    @apply font-mono text-gold-500 text-xs tracking-[0.2em] uppercase;
+  }
+
+  .heading-display {
+    @apply font-display text-stone-50 leading-tight tracking-tight;
+  }
+
+  .gold-gradient {
+    background: linear-gradient(135deg, #FFB21D 0%, #E8920A 40%, #C47005 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gold-gradient-reverse {
+    background: linear-gradient(135deg, #FFC947 0%, #FFB21D 50%, #E8920A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass-card {
+    @apply bg-stone-900/40 border border-stone-800/60 backdrop-blur-sm rounded-2xl;
+  }
+
+  .gold-border-card {
+    position: relative;
+    @apply bg-stone-900/50 rounded-2xl overflow-hidden;
+  }
+  .gold-border-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(232, 146, 10, 0.6), rgba(120, 80, 20, 0.2), rgba(232, 146, 10, 0.3));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .stat-tile {
+    @apply glass-card p-6 relative overflow-hidden transition-all duration-300 hover:bg-stone-900/60 hover:border-gold-700/40 hover:-translate-y-1;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-400 text-slate-950 font-body font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-gold-500/20 active:scale-95;
+    font-weight: 600;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 border border-stone-700 hover:border-gold-500/60 text-stone-300 hover:text-gold-400 font-body rounded-full transition-all duration-200 hover:bg-stone-900/50 active:scale-95;
+    font-weight: 500;
+  }
+
+  .nav-link {
+    @apply font-body text-stone-400 hover:text-gold-400 transition-colors duration-200 text-sm font-medium tracking-wide;
+  }
+
+  .nav-link-active {
+    @apply font-body text-gold-400 text-sm font-medium tracking-wide;
+  }
+
+  .progress-bar {
+    @apply h-1.5 bg-stone-800 rounded-full overflow-hidden;
+  }
+
+  .progress-fill {
+    @apply h-full rounded-full;
+    background: linear-gradient(90deg, #E8920A, #FFC947);
+    transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tag {
+    @apply inline-flex items-center px-3 py-1 text-xs font-mono tracking-wider rounded-full border;
+  }
+
+  .tag-gold {
+    @apply tag bg-gold-500/10 border-gold-500/30 text-gold-400;
+  }
+
+  .tag-stone {
+    @apply tag bg-stone-800/60 border-stone-700/60 text-stone-400;
+  }
+
+  .divider-gold {
+    @apply w-16 h-px;
+    background: linear-gradient(90deg, transparent, #E8920A, transparent);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+  .delay-600 { animation-delay: 600ms; }
+  .delay-700 { animation-delay: 700ms; }
+
+  .opacity-0-init {
+    opacity: 0;
+  }
+}
+
+/* Road map timeline */
+.roadmap-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: linear-gradient(180deg, #E8920A 0%, rgba(232, 146, 10, 0.2) 100%);
+  top: 0;
+  bottom: 0;
+}
+
+.roadmap-node {
+  position: relative;
+  z-index: 1;
+}
+
+.roadmap-node::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: #E8920A;
+  border-radius: 50%;
+  border: 2px solid #0A0C10;
+  top: 50%;
+  margin-top: -6px;
+}
+
+/* Shimmer effect for loading states */
+.shimmer-text {
+  background: linear-gradient(90deg, #E8920A 25%, #FFC947 50%, #E8920A 75%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* Custom scrollbar for dashboard */
+.dashboard-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.dashboard-scroll::-webkit-scrollbar-thumb {
+  @apply bg-stone-700 rounded-full;
+}
